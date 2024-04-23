@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<script src="main.js" type="module"></script>
+<script src="game.js" type="module"></script>
+
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    background-color: gray;
+}
+
+.flex {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#output {
+    margin: 0.5em 1em 0.2em 1em;
+    border: 1px solid black;
+    padding: 1em;
+    flex: 1 0 auto;
+    background-color: white;
+}
+
+#input {
+    margin: 0 1em 0.5em 1em;
+    display: block;
+    flex-shrink: 0;
+}
+</style>
+
+
+</head>
+
+<body>
+<div class="flex">
+<div id="output">test</div>
+<input id="input" type="text" placeholder="Enter a command">
+</div>
+</body>
+
+</html>
