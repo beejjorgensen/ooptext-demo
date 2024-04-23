@@ -5,7 +5,7 @@ export class Room {
     }
 
     get_full_desc() {
-        return `<p><b>${this.short_desc}</b><br>${this.desc}<p>`;
+        return `<p><b>${this.short_desc}</b><br>${this.desc}`;
     }
 }
 

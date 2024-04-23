@@ -1,10 +1,12 @@
 function readline_handler(resolve, _) {
     const input = document.getElementById("input");
 
+    input.focus();
+
     function keypress_handler(ev) {
         if (ev.key == "Enter") {
             const command = input.value.trim();
-            if (command != "") resolve(command);
+            resolve(command);
             input.removeEventListener("keypress", keypress_handler);
             input.value = "";
         }
