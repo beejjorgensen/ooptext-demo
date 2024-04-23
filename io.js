@@ -17,3 +17,11 @@ export function readline() {
     return new Promise(readline_handler);
 }
 
+export function print(s) {
+    const output = document.getElementById("output");
+
+    output.innerHTML += s;
+
+    output.scrollTop = output.scrollHeight;
+}
+
