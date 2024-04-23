@@ -1,6 +1,6 @@
-import { readline } from "./main.js";
+import { readline } from "./io.js";
 
-export async function process(c) {
+export async function run_game(c) {
     for(;;) {
         const c = await readline();
         console.log(`Game got command: ${c}`);
@@ -8,6 +8,3 @@ export async function process(c) {
 
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    process();
-});
