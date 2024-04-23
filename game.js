@@ -14,6 +14,8 @@ room2.add(sword);
 const player = new Player();
 player.loc = room1;
 
+const list_indent = "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
 function print_cant_go() {
     print("<p>You can't go that way.");
 }
@@ -24,7 +26,7 @@ function handle_look() {
     if (player.loc.contents.length != 0) {
         print("You also see:");
         for (const e of player.loc.contents) {
-            print(`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${e.short_desc}`);
+            print(`${list_indent}${e.short_desc}`);
         }
     }
 }
@@ -45,7 +47,59 @@ function handle_north() {
         print_cant_go();
 }
 
-function handle_take() {
+function handle_take(words) {
+    const direct_obj = words[1];
+
+    let found_item = null;
+
+    for (const i of player.loc.contents) {
+        if (i.name == direct_obj)
+            found_item = i;
+    }
+
+    if (found_item === null) {
+        print(`<p>I don't see that here.`);
+        return;
+    }
+
+    player.loc.remove(found_item);
+    player.add(found_item);
+
+    print("<p>Taken.");
+}
+
+function handle_drop(words) {
+    const direct_obj = words[1];
+
+    let found_item = null;
+
+    for (const i of player.contents) {
+        if (i.name == direct_obj)
+            found_item = i;
+    }
+
+    if (found_item === null) {
+        print(`<p>You don't appear to be carrying that.`);
+        return;
+    }
+
+    player.remove(found_item);
+    player.loc.add(found_item);
+
+    print("<p>Dropped.");
+}
+
+function handle_inventory() {
+    print("You are currently carrying:");
+
+    if (player.contents.length == 0) {
+        print(`${list_indent}Nothing!`);
+        return;
+    }
+
+    for (const e of player.contents) {
+        print(`${list_indent}${e.short_desc}`);
+    }
 }
 
 export async function run_game(c) {
@@ -58,6 +112,9 @@ export async function run_game(c) {
         'north': handle_north,
         'get': handle_take,
         'take': handle_take,
+        'drop': handle_drop,
+        'i': handle_inventory,
+        'inventory': handle_inventory,
     };
 
     print("<h2><i>Welcome to the Demo Adventure!</i></h2>");

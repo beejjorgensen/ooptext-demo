@@ -1,6 +1,20 @@
 export class Player {
     constructor() {
         this.loc = undefined;
+        this.contents = [];
+    }
+
+    add(entity) {
+        this.contents.push(entity);
+    }
+
+    remove(entity) {
+        const index = this.contents.indexOf(entity);
+
+        if (index == -1)
+            throw "tried to remove unadded entity";
+
+        this.contents.splice(index, 1);
     }
 }
 
