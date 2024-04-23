@@ -1,3 +1,9 @@
+export class Player {
+    constructor() {
+        this.loc = undefined;
+    }
+}
+
 export class Room {
     constructor(short_desc, desc) {
         this.short_desc = short_desc;
@@ -23,3 +29,10 @@ export class Room {
     }
 }
 
+export class Entity {
+    constructor(name, short_desc, desc) {
+        this.name = name;
+        this.short_desc = short_desc;
+        this.long_desc = desc;
+    }
+}

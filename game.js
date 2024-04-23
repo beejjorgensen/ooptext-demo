@@ -1,6 +1,5 @@
 import { readline, print } from "./io.js";
-import { Room } from "./room.js";
-import { Entity } from "./entity.js";
+import { Player, Room, Entity } from "./classes.js";
 
 const room1 = new Room("Outside Entrance", "You're standing outside the cave entrance, which is to the south. Cold air flows out mouth of the cave.");
 const room2 = new Room("Inside Entrance", "You're just inside the entrance to the cave. Soft light filters in from the north, and a dark passage leads west.");
@@ -12,34 +11,35 @@ const sword = new Entity("sword", "a sword", "It's a shiny little sword");
 
 room2.add(sword);
 
-let player_loc = room1;
+const player = new Player();
+player.loc = room1;
 
 function print_cant_go() {
     print("<p>You can't go that way.");
 }
 
 function handle_look() {
-    print(player_loc.get_full_desc());
+    print(player.loc.get_full_desc());
 
-    if (player_loc.contents.length != 0) {
+    if (player.loc.contents.length != 0) {
         print("You also see:");
-        for (const e of player_loc.contents) {
+        for (const e of player.loc.contents) {
             print(`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${e.short_desc}`);
         }
     }
 }
 
 function handle_south() {
-    if (player_loc.s_to) {
-        player_loc = player_loc.s_to;
+    if (player.loc.s_to) {
+        player.loc = player.loc.s_to;
         handle_look();
     } else
         print_cant_go();
 }
 
 function handle_north() {
-    if (player_loc.n_to) {
-        player_loc = player_loc.n_to;
+    if (player.loc.n_to) {
+        player.loc = player.loc.n_to;
         handle_look();
     } else
         print_cant_go();
